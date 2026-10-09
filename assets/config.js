@@ -10,7 +10,7 @@ window.SHOP = {
   // Free form inbox from formspree.io (or web3forms.com). Leave blank to fall back to email.
   contactFormEndpoint: "",
 
-  email: "hello@carouselcurios.com",
+  email: "car0uselcuri0s@gmail.com",
   instagram: "", // e.g. "https://instagram.com/carouselcurios"
   etsy: "",
   ebay: "",
