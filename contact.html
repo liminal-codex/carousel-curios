@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact | Carousel Curios</title>
+<meta name="description" content="Carousel Curios: rare vintage books, art, vintage clothing, collectibles and antiques.">
+<meta property="og:title" content="Contact | Carousel Curios">
+<meta property="og:description" content="Carousel Curios: rare vintage books, art, vintage clothing, collectibles and antiques.">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="contact">
+<header class="site-header"></header>
+<main>
+<div class="wrap prose">
+  <p class="eyebrow">Contact</p>
+  <h1>Get in touch</h1>
+  <p>Ask about an item, make an offer, or tell me what you're looking for. I usually reply within a day or two.</p>
+  <p class="notice" id="status" hidden role="status"></p>
+  <form class="contact">
+    <label>Name <input name="name" required autocomplete="name"></label>
+    <label>Email <input name="email" type="email" required autocomplete="email"></label>
+    <label>Item number (optional) <input name="item" placeholder="e.g. CC-0001"></label>
+    <label>Message <textarea name="message" required></textarea></label>
+    <input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div><button class="btn" type="submit">Send message</button></div>
+  </form>
+  <p class="small" style="margin-top:28px">Or email <a id="mail" href="#"></a><span id="ig" hidden>, or send a message on <a href="#" target="_blank" rel="noopener">Instagram</a></span>.</p>
+</div>
+</main>
+<footer class="site-footer"></footer>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carousel Curios | Rare books, art and vintage finds</title>
+<meta name="description" content="Carousel Curios: rare vintage books, art, vintage clothing, collectibles and antiques.">
+<meta property="og:title" content="Carousel Curios | Rare books, art and vintage finds">
+<meta property="og:description" content="Carousel Curios: rare vintage books, art, vintage clothing, collectibles and antiques.">
+<meta property="og:image" content="assets/logo.png">
+<link rel="icon" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body data-page="shop">
+<header class="site-header"></header>
+<main>
+<div class="hero wrap">
+  <img src="assets/logo.png" alt="Carousel Curios logo">
+  <h1>Carousel Curios</h1>
+  <p>Rare and vintage books, original art, vintage clothing and curious collectibles. Each piece is one of a kind.</p>
+  <a class="btn" href="#shop">Browse the shop</a>
+</div>
+<section class="wrap">
+  <div class="section-head"><h2>Featured</h2><span class="eyebrow">Hand-picked</span></div>
+  <div class="grid" id="featured"></div>
+</section>
+<section class="wrap" id="shop">
+  <div class="section-head"><h2>The shop</h2><span class="eyebrow">New finds added often</span></div>
+  <div class="filters">
+    <input id="search" type="search" placeholder="Search titles, authors, tags" aria-label="Search">
+    <select id="category" aria-label="Category"></select>
+    <select id="show" aria-label="Show">
+      <option value="available">For sale</option>
+      <option value="all">Include sold</option>
+    </select>
+  </div>
+  <div class="grid" id="grid"><p class="empty">Loading…</p></div>
+</section>
+</main>
+<footer class="site-footer"></footer>
+<script src="assets/config.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
