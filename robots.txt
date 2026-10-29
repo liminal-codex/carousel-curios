@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://liminal-codex.github.io/carousel-curios/sitemap.xml
