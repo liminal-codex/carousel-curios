@@ -1,6 +1,8 @@
 // Shop settings. This is the only file you need to edit to connect services.
 window.SHOP = {
   name: "Carousel Curios",
+  // The shop's public address, used for the sitemap. Change it when you buy a domain.
+  siteUrl: "https://liminal-codex.github.io/carousel-curios/",
   tagline: "Rare books, art, vintage clothing and curious things.",
 
   // Google Sheet > File > Share > Publish to web > "Website feed" tab > CSV.

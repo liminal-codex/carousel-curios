@@ -20,13 +20,14 @@
 <div class="wrap prose">
   <p class="eyebrow">Contact</p>
   <h1>Get in touch</h1>
-  <p>Ask about an item, make an offer, or tell me what you're looking for. I usually reply within a day or two.</p>
+  <p>Ask about an item, make an offer, tell me what you're looking for, or offer something to <a href="sell.html">sell</a>. I usually reply within a day or two.</p>
   <p class="notice" id="status" hidden role="status"></p>
   <form class="contact">
     <label>Name <input name="name" required autocomplete="name"></label>
     <label>Email <input name="email" type="email" required autocomplete="email"></label>
     <label>Item number (optional) <input name="item" placeholder="e.g. CC-0001"></label>
     <label>Message <textarea name="message" required></textarea></label>
+    <input type="hidden" name="_subject">
     <input class="hp" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true">
     <div><button class="btn" type="submit">Send message</button></div>
   </form>

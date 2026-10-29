@@ -6,6 +6,7 @@
   const links = [
     ["index.html", "Shop", "shop"],
     ["about.html", "About", "about"],
+    ["sell.html", "Sell to us", "sell"],
     ["shipping.html", "Shipping", "shipping"],
     ["contact.html", "Contact", "contact"],
   ];
@@ -34,7 +35,8 @@
         <div>© ${new Date().getFullYear()} ${S.name}</div>
         <nav>
           <a href="index.html">Shop</a><a href="about.html">About</a><a href="shipping.html">Shipping</a>
-          <a href="returns.html">Returns</a><a href="contact.html">Contact</a>
+          <a href="returns.html">Returns</a><a href="condition.html">Condition guide</a>
+          <a href="sell.html">Sell to us</a><a href="partners.html">Partners</a><a href="contact.html">Contact</a>
           ${social.map(([l, u]) => `<a href="${u}" target="_blank" rel="noopener">${l}</a>`).join("")}
           <a href="mailto:${S.email}">${S.email}</a>
         </nav>
@@ -65,6 +67,21 @@
       .map((r) => Object.fromEntries(head.map((h, i) => [h, (r[i] || "").trim()])));
   }
 
+  // The sheet's Master export tab uses each platform's own column names.
+  // Map them onto the website's names so either tab can be published.
+  function fromMaster(it) {
+    if (!("site_category" in it)) return it;
+    return {
+      ...it,
+      title: it.short_title || it.title,
+      category: it.site_category,
+      subcategory: it.site_subcategory,
+      condition: it.condition_grade,
+      format: it.binding,
+      price: String(parseFloat(it.price) || ""),
+    };
+  }
+
   async function loadItems() {
     const urls = [S.inventoryCsvUrl, "data/inventory.csv"].filter(Boolean);
     for (const url of urls) {
@@ -72,6 +89,7 @@
         const res = await fetch(url, { cache: "no-cache" });
         if (!res.ok) continue;
         return parseCSV(await res.text())
+          .map(fromMaster)
           .filter((it) => it.id && it.status && it.status !== "Draft" && it.status !== "Hidden")
           .map((it) => ({ ...it, photos: [it.photo1, it.photo2, it.photo3].filter(Boolean) }));
       } catch (e) { /* try the next source */ }
@@ -106,6 +124,17 @@
     if (fEl) {
       fEl.closest("section").hidden = !featured.length;
       fEl.innerHTML = featured.slice(0, 4).map(card).join("");
+    }
+
+    const tiles = document.getElementById("browse");
+    if (tiles) {
+      const order = ["Books", "Antiques", "Clothing", "Collectibles", "Art"];
+      const counts = {};
+      items.filter((it) => it.status !== "Sold").forEach((it) => { counts[it.category] = (counts[it.category] || 0) + 1; });
+      const names = Object.keys(counts).filter(Boolean)
+        .sort((a, b) => ((order.indexOf(a) + 1) || 99) - ((order.indexOf(b) + 1) || 99) || a.localeCompare(b));
+      tiles.closest("section").hidden = names.length < 2;
+      tiles.innerHTML = names.map((c) => `<a class="tile" href="index.html?category=${encodeURIComponent(c)}#shop"><span>${esc(c)}</span><small>${counts[c]} for sale</small></a>`).join("");
     }
 
     const grid = document.getElementById("grid");
@@ -203,10 +232,21 @@
     const form = document.querySelector("form.contact");
     const itemId = new URLSearchParams(location.search).get("item");
     const msg = form.querySelector("[name=message]");
+    const topics = {
+      sell: ["Selling books or antiques", "Hi, I have some pieces you might be interested in. Here's what I have: "],
+      partner: ["Partnering with Carousel Curios", "Hi, I'm writing from (shop or venue name). We'd like to talk about "],
+      want: ["Looking for a book or piece", "Hi, I'm looking for "],
+    };
+    const topic = topics[new URLSearchParams(location.search).get("topic")];
+    let subject = itemId ? `Question about ${itemId}` : "Hello from the website";
     if (itemId) {
       form.querySelector("[name=item]").value = itemId;
       msg.value = `Hi, I'm interested in item ${itemId}. `;
+    } else if (topic) {
+      subject = topic[0];
+      msg.value = topic[1];
     }
+    form.querySelector("[name=_subject]").value = subject;
     if (S.instagram) {
       const ig = document.getElementById("ig");
       ig.hidden = false;
@@ -222,7 +262,7 @@
       const status = document.getElementById("status");
       if (!S.contactFormEndpoint) {
         const body = `${data.get("message")}\n\nFrom: ${data.get("name")} <${data.get("email")}>`;
-        location.href = `mailto:${S.email}?subject=${encodeURIComponent(itemId ? `Question about ${itemId}` : "Hello from the website")}&body=${encodeURIComponent(body)}`;
+        location.href = `mailto:${S.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         return;
       }
       const btn = form.querySelector("button");
